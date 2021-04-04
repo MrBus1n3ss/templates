@@ -6,6 +6,7 @@ sys.path.append(os.getcwd)
 
 from util.createMenu import CreateMenu
 from util.menus import Menus
+import text.mainText as mainText
 
 # TODO: test on each platform
 def getPlatform():
@@ -52,8 +53,25 @@ def getProjectFolder(platform):
 def createFile(path, fileName):
     try:
         file = open(joinFileName(path, fileName), 'w')
+        print('{} created File'.format(fileName))
+        return file
     except Exception:
         print('Unknown file {}'.format(fileName))
+
+
+def writeFile(file, contents):
+    try:
+        file.write(contents)
+    except Exception:
+        print('Failed to write lines')
+
+
+def closeFile(file):
+    try:
+        file.close()
+    except Exception:
+        print('Uknown file to close {}'.format(file))
+
 
 def createDir(dirName):
     if not os.path.isdir(dirName):
@@ -62,6 +80,20 @@ def createDir(dirName):
         print('{} created dir'.format(dirName))
     else:
         print('{} already exists'.format(dirName))
+
+
+def createInit(path, dirName):
+    path = joinFileName(path, dirName)
+    createDir(path)
+    initFile = createFile(path, '__init__.py')
+    closeFile(initFile)
+
+
+def createFileWithContent(path, fileName, contents):
+    createDir(path)
+    newFile = createFile(path, fileName)
+    writeFile(newFile, contents)
+    closeFile(newFile)
 
 
 def main():
@@ -94,25 +126,11 @@ def main():
     createDir(path)
     
     #Create Project
-    path = joinFileName(path, projectName)
-    createDir(path)
-    
-    #TODO: move to function
-    logPath = joinFileName(path, 'log')
-    createDir(logPath)
-    createFile(logPath, '__init__.py')
-    
-    utilPath = joinFileName(path, 'util')
-    createDir(utilPath)
-    createFile(logPath, '__init__.py')
-    
-    testPath = joinFileName(path, 'test')
-    createDir(testPath)
-    createFile(logPath, '__init__.py')
-    
-    includePath = joinFileName(path, 'include')
-    createDir(includePath)
-    createFile(logPath, '__init__.py')
+    createFileWithContent(path, '{}.py'.format(projectName), mainText.main)
+    createInit(path, 'log')
+    createInit(path, 'util')
+    createInit(path, 'test')
+    createInit(path, 'include')
 
 
 
