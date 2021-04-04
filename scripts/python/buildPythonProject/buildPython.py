@@ -1,4 +1,23 @@
 import os
+import sys
+
+
+def getPlatform():
+    platforms = {
+        'linux': 'linux',
+        'darwin': 'mac',
+        'win32': 'windows'
+    }
+    os = sys.platform
+    if 'linux' in os:
+        os = platforms['linux']
+    if 'darwin' in os:
+        os = platforms['darwin']
+    if 'win' in os:
+        os = platforms['win32']
+    return os
+    
+
 
 # *nix/Windows safe
 def joinFileName(*argv):
@@ -14,7 +33,8 @@ def joinFileName(*argv):
         print('error')
 
 def main():
-    print(joinFileName('Test'))
+    platform = getPlatform()    
+    print(joinFileName('Test', 'John'))
 
 
 if __name__ == '__main__':
