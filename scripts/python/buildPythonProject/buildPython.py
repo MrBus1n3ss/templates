@@ -120,6 +120,7 @@ def main():
     # TODO: currently vanilla python, want to add other projects Django/Flask
 
 
+    #Get home and create projects folder
     platform = getPlatform()
     path = getProjectFolder(platform)    
     path = joinFileName(path, 'projects')
