@@ -32,8 +32,8 @@
 ## Scripts
 
 ## Tools
-    ### Python Tools
-        #### Menus
+### Python Tools
+#### Menus
 #### Create Menu
 #### Debug
 #### Email
