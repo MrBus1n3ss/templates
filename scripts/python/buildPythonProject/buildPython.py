@@ -126,14 +126,18 @@ def main():
     path = joinFileName(path, 'projects')
     createDir(path)
     
+    
     #Create Project
+    path = joinFileName(path, '{}'.format(projectName))
     createFileWithContent(path, '{}.py'.format(projectName), mainText.main)
+    createFileWithContent(path, 'requirements.txt', '') # Will have requirements if needed
+    # Depending on the file, I may add a docker file
+    # createFileWithContent(path, 'Dockerfile', '') # Will have requirements if needed
+
     createInit(path, 'log')
     createInit(path, 'util')
     createInit(path, 'test')
     createInit(path, 'include')
-
-
 
 
 if __name__ == '__main__':
